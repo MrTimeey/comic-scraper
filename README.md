@@ -1,4 +1,4 @@
-# Comic Scraper [![Build Status](https://travis-ci.org/MrTimeey/comic-scraper.svg?branch=master)](https://travis-ci.org/MrTimeey/comic-scraper)
+# Comic Scraper [![Java CI](https://github.com/MrTimeey/comic-scraper/actions/workflows/build.yml/badge.svg?branch=main)](https://github.com/MrTimeey/comic-scraper/actions/workflows/build.yml) [![Publish Docker image](https://github.com/MrTimeey/comic-scraper/actions/workflows/publish_docker_image.yml/badge.svg?branch=main)](https://github.com/MrTimeey/comic-scraper/actions/workflows/publish_docker_image.yml)
 
 The comic scraper is a backend application which collects information of comic series and their new releases. It's also planned to generate a custom newsletter.
 Besides that it's a learning project for various technologies.
