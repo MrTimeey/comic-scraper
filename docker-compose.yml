@@ -1,0 +1,44 @@
+version: '3'
+
+services:
+
+  mongo-database:
+    image: bitnami/mongodb:4.2
+    restart: always
+    environment:
+      - MONGODB_USERNAME=mongouser
+      - MONGODB_DATABASE=comic_scraper
+      - MONGODB_PASSWORD=${MONGO_PASS}
+      - MONGODB_ROOT_PASSWORD=${MONGO_ROOT_PASS}
+    volumes:
+      - "mongo-data:/data/db"
+
+  comic-scraper:
+    build:
+        context: .
+        dockerfile: Dockerfile
+    depends_on:
+      - mongo-database
+    restart: always
+    ports:
+      - 8086:8086
+    environment:
+      - SPRING_SECURITY_USER_NAME=${SECURITY_USER}
+      - SPRING_SECURITY_USER_PASSWORD=${SECURITY_PASSWORD}
+      - SPRING_SECURITY_USER_ROLES=USER
+      - SPRING_DATA_MONGODB_HOST=mongo-database
+      - SPRING_DATA_MONGODB_USERNAME=mongouser
+      - SPRING_DATA_MONGODB_DATABASE=comic_scraper
+      - SPRING_DATA_MONGODB_PASSWORD=${MONGO_PASS}
+      - SPRING_MAIL_PASSWORD=${SPRING_MAIL_PASS}
+      - SPRING_MAIL_HOST=smtp.strato.de
+      - SPRING_MAIL_PORT=465
+      - SPRING_MAIL_USERNAME=${SPRING_MAIL_USER}
+      - SPRING_MAIL_PROPERTIES_MAIL_SMTP_SSL_ENABLE=true
+      - SPRING_MAIL_PROPERTIES_MAIL_SMTP_AUTH=true
+      - SPRING_MAIL_PROPERTIES_MAIL_TRANSPORT_PROTOCOL=smtp
+      - SPRING_MAIL_PROPERTIES_MAIL_SMTP_STARTTLS_ENABLE=true
+
+volumes:
+  mongo-data:
+    driver: local

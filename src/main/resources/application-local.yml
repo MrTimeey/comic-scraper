@@ -1,0 +1,25 @@
+server:
+  port: 8086
+
+spring:
+  security:
+    user:
+      name: user
+      password: password
+      roles: USER
+  data:
+    mongodb:
+      host: localhost
+      username: mongouser
+      password: ${MONGODB_PASSWORD:123456}
+      database: comic_scraper
+  mail:
+    host: smtp.strato.de
+    port: 465
+    username: ${MAIL_USER:TBD}
+    password: ${MAIL_PASSWORD:TBD}
+    properties:
+      "mail.smtp.ssl.enable": true
+      "mail.smtp.auth": true
+      "mail.transport.protocol": smtp
+      "mail.smtp.starttls.enable": true
